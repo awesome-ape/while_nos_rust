@@ -10,6 +10,9 @@ pub enum AExp {
     Mult(Box<AExp>, Box<AExp>),
     Sub(Box<AExp>, Box<AExp>),
     Iand(Box<AExp>, Box<AExp>),
+    Shl(Box<AExp>, Box<AExp> ),
+    Shr(Box<AExp>, Box<AExp> ),
+    
 }
 
 // Boolean Expressions (BExp)
@@ -103,6 +106,57 @@ pub fn test4() -> Stm {
                         Box::new(AExp::Var("x".to_string())),
                         Box::new(AExp::Num(1)),
                     ),
+                )),
+            )),
+        )),
+    )
+}
+pub fn test5() -> Stm {
+    Stm::Ass(
+        "x".to_string(),
+        AExp::Shl(
+            Box::new(AExp::Num(5)),
+            Box::new(AExp::Num(2)),
+        ),
+    )
+}
+pub fn test6() -> Stm {
+    Stm::Ass(
+        "x".to_string(),
+        AExp::Shr(
+            Box::new(AExp::Num(20)),
+            Box::new(AExp::Num(2)),
+        ),
+    )
+}
+pub fn test7() -> Stm {
+    Stm::Comp(
+        Box::new(Stm::Ass("a".to_string(), AExp::Num(84))),
+        Box::new(Stm::Comp(
+            Box::new(Stm::Ass("b".to_string(), AExp::Num(22))),
+            Box::new(Stm::Comp(
+                Box::new(Stm::Ass("c".to_string(), AExp::Num(0))),
+                Box::new(Stm::While(
+                    BExp::Neg(Box::new(BExp::Aeq(
+                        AExp::Var("b".to_string()),
+                        AExp::Num(0),
+                    ))),
+                    Box::new(Stm::Comp(
+                        Box::new(Stm::Ass(
+                            "a".to_string(),
+                            AExp::Shl(
+                                Box::new(AExp::Var("a".to_string())),
+                                Box::new(AExp::Num(1)),
+                            ),
+                        )),
+                        Box::new(Stm::Ass(
+                            "b".to_string(),
+                            AExp::Shr(
+                                Box::new(AExp::Var("b".to_string())),
+                                Box::new(AExp::Num(1)),
+                            ),
+                        )),
+                    )),
                 )),
             )),
         )),
