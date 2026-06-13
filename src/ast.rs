@@ -35,6 +35,7 @@ pub enum Stm {
     Comp(Box<Stm>, Box<Stm>),
     If(BExp, Box<Stm>, Box<Stm>),
     While(BExp, Box<Stm>),
+   DoWhile(Box<Stm>, BExp),
 }
 
 
@@ -115,7 +116,7 @@ pub fn test5() -> Stm {
     Stm::Ass(
         "x".to_string(),
         AExp::Shl(
-            Box::new(AExp::Num(5)),
+            Box::new(AExp::Var("x".to_string())),
             Box::new(AExp::Num(2)),
         ),
     )
@@ -124,8 +125,8 @@ pub fn test6() -> Stm {
     Stm::Ass(
         "x".to_string(),
         AExp::Shr(
-            Box::new(AExp::Num(20)),
-            Box::new(AExp::Num(2)),
+            Box::new(AExp::Var("x".to_string())),
+            Box::new(AExp::Num(3)),
         ),
     )
 }
@@ -160,5 +161,20 @@ pub fn test7() -> Stm {
                 )),
             )),
         )),
+    )
+}
+pub fn test8() -> Stm {
+    Stm::DoWhile(
+        Box::new(Stm::Ass(
+            "x".to_string(),
+            AExp::Shr(
+                Box::new(AExp::Var("x".to_string())),
+                Box::new(AExp::Num(1)),
+            ),
+        )),
+        BExp::Gte(
+            AExp::Var("x".to_string()),
+            AExp::Num(2),
+        ),
     )
 }

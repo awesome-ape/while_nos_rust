@@ -37,5 +37,14 @@ pub fn nos(c: (Stm, State)) -> State {
                 state
             }
         }
+        Stm::DoWhile(s, b) => {
+        let intermediate_state = nos((*s.clone(), state));
+
+        if solve_b(&b, &intermediate_state) == "tt" {
+        nos((Stm::DoWhile(s, b), intermediate_state))
+        } else {
+        intermediate_state
+    }
+}
     }
 }

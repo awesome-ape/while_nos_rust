@@ -100,3 +100,21 @@ pub fn s2() -> State {
     s.insert("y".to_string(), 5);
     s
 }
+pub fn s3() -> State {
+    let mut s = HashMap::new();
+    s.insert("x".to_string(), 3);
+    s
+}
+
+pub fn s4() -> State {
+    let mut s = HashMap::new();
+    s.insert("x".to_string(), 64);
+    s
+}
+
+pub fn s5() -> State {
+    let mut s = HashMap::new();
+    s.insert("a".to_string(), 1);
+    s.insert("b".to_string(), 8);
+    s
+}
